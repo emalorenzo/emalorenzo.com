@@ -26,7 +26,6 @@ const nextConfig = {
     // contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: [],
     formats: ['image/avif', 'image/webp'],
-    allowFutureImage: true,
   },
   // add @import 'styles/_functions'; to all scss files.
   sassOptions: {
