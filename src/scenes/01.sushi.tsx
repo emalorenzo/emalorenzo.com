@@ -1,5 +1,4 @@
 import { Gltf } from "@react-three/drei";
-import { Suspense } from "react";
 /**
  * Copyright (c) Michael Dougall. All rights reserved.
  *
@@ -9,7 +8,7 @@ import { Suspense } from "react";
 
 export default function Scene() {
   return (
-    <Suspense fallback={null}>
+    <>
       <ambientLight intensity={0.25} />
       <pointLight
         castShadow={true}
@@ -35,6 +34,6 @@ export default function Scene() {
         <planeGeometry args={[30, 30]} />
         <meshStandardMaterial color={"#912b2b"} />
       </mesh>
-    </Suspense>
+    </>
   );
 }
