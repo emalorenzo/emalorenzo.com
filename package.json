@@ -21,6 +21,9 @@
     "react-dom": "18.2.0",
   },
   "devDependencies": {
-    "eslint-config-prettier": "^9.0.0"
+    "@next/bundle-analyzer": "^13.4.13",
+    "critters": "^0.0.20",
+    "eslint-config-prettier": "^9.0.0",
+    "raw-loader": "^4.0.2"
   }
 }
