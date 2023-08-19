@@ -1,6 +1,6 @@
 "use client";
 
-import { Html, Loader, OrbitControls, PerspectiveCamera, Preload } from "@react-three/drei";
+import { Html, Loader, Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import Scene from "~/scenes/01.sushi";
@@ -9,6 +9,8 @@ export default function SushiPage() {
   return (
     <div>
       <Canvas
+        gl={{ antialias: false }}
+        camera={{ position: [-5, 4, 7], near: 0.1, far: 100, fov: 30 }}
         style={{
           position: "absolute",
           top: 0,
@@ -16,6 +18,7 @@ export default function SushiPage() {
           width: "100vw",
           height: "100%",
         }}
+        shadows
       >
         <Suspense
           fallback={
@@ -25,8 +28,6 @@ export default function SushiPage() {
           }
         >
           <Scene />
-          <PerspectiveCamera makeDefault position={[-5, 4, 7]} />
-          <OrbitControls />
         </Suspense>
         <Preload all />
       </Canvas>
