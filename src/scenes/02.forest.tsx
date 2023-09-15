@@ -99,7 +99,10 @@ export default function Scene() {
   //   },
   // });
 
-  const { azimuth, turbidity, rayleigh, inclination, distance } = useControls({
+  const { effects, azimuth, turbidity, rayleigh, inclination, distance } = useControls({
+    effects: {
+      value: false,
+    },
     azimuth: {
       value: 0.1,
       min: 0,
@@ -153,18 +156,20 @@ export default function Scene() {
       >
         <Terrain />
       </group>
-      <EffectComposer disableNormalPass multisampling={4}>
-        {/* <DepthOfField
+      {effects && (
+        <EffectComposer disableNormalPass multisampling={4}>
+          {/* <DepthOfField
           ref={dof}
           focalLength={focalLenght}
           bokehScale={bokehScale}
           focusDistance={focusDistance}
         /> */}
-        {/* <Bloom mipmapBlur intensity={0.5} luminanceThreshold={0.5} /> */}
-        {/* <LensFlare opacity={0.3} /> */}
-        <N8AO aoRadius={20} intensity={4} screenSpaceRadius />
-        {/* <Vignette offset={0.4} darkness={0.4} /> */}
-      </EffectComposer>
+          {/* <Bloom mipmapBlur intensity={0.5} luminanceThreshold={0.5} /> */}
+          {/* <LensFlare opacity={0.3} /> */}
+          <N8AO aoRadius={20} intensity={4} screenSpaceRadius />
+          {/* <Vignette offset={0.4} darkness={0.4} /> */}
+        </EffectComposer>
+      )}
       <Trees count={1000} />
       <mesh position={[0, -1, 0]}>
         <boxGeometry args={[15, 2, 8]} />
