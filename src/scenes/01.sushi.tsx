@@ -17,8 +17,6 @@ const TARGET_CAMERA_POSITION = new Vector3(10, 18, -22);
 
 export default function Scene() {
   useFrame(({ pointer, camera }) => {
-    console.log(pointer.y);
-
     const x = CAMERA_POSITION.x + pointer.x * 5;
     const y = CAMERA_POSITION.y + pointer.y * 5;
 
