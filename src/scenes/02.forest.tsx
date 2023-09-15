@@ -4,7 +4,6 @@ import {
   MeshTransmissionMaterial,
   OrbitControls,
   PerspectiveCamera,
-  Sky,
   StatsGl,
 } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
@@ -166,7 +165,7 @@ export default function Scene() {
         /> */}
           {/* <Bloom mipmapBlur intensity={0.5} luminanceThreshold={0.5} /> */}
           {/* <LensFlare opacity={0.3} /> */}
-          <N8AO aoRadius={20} intensity={4} screenSpaceRadius />
+          <N8AO aoRadius={20} intensity={4} screenSpaceRadius halfRes />
           {/* <Vignette offset={0.4} darkness={0.4} /> */}
         </EffectComposer>
       )}
@@ -239,13 +238,13 @@ export default function Scene() {
       <PerspectiveCamera position={CAMERA_POSITION} fov={50} makeDefault />
 
       {/* <directionalLight castShadow intensity={1} position={[10, 10, 5]} /> */}
-      <Sky
+      {/* <Sky
         azimuth={azimuth}
         turbidity={turbidity}
         rayleigh={rayleigh}
         inclination={inclination}
         distance={distance}
-      />
+      /> */}
     </>
   );
 }
