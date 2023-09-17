@@ -1,8 +1,9 @@
 import { useGLTF } from "@react-three/drei";
-import { forwardRef } from "react";
+import { forwardRef, useLayoutEffect } from "react";
+import * as THREE from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 
-type Props = JSX.IntrinsicElements["mesh"] & {
+type Props = JSX.IntrinsicElements["group"] & {
   count: number;
 };
 
@@ -15,18 +16,22 @@ export type GLTFResult = GLTF & {
   };
 };
 
-export const Tree = forwardRef(function TreeFn({ count, ...props }: Props, ref) {
+export const Tree = forwardRef(function TreeFn({ count, ...props }: Props, ref: any) {
   const { nodes, materials } = useGLTF("/assets/tree.glb") as GLTFResult;
+
+  useLayoutEffect(() => {
+    if (ref?.current) return;
+
+    ref?.current.geometry.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+  }, []);
+
   return (
-    <group>
+    <group {...props}>
       <instancedMesh
-        // @ts-ignore
         ref={ref}
-        // @ts-ignore
         args={[undefined, undefined, count]}
         geometry={nodes.Tree002.geometry}
         material={materials["Material.001"]}
-        {...props}
       />
     </group>
   );
