@@ -15,7 +15,7 @@ import { SushiPlate } from "~/models/sushiPlate";
 const CAMERA_POSITION = new Vector3(10, 18, -22);
 const TARGET_CAMERA_POSITION = new Vector3(10, 18, -22);
 
-export default function Scene() {
+export default function SushiScene() {
   useFrame(({ pointer, camera }) => {
     const x = CAMERA_POSITION.x + pointer.x * 5;
     const y = CAMERA_POSITION.y + pointer.y * 5;

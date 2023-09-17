@@ -2,12 +2,14 @@
 
 import { Loader, Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Leva } from "leva";
 import { Suspense } from "react";
 import Scene from "~/scenes/02.forest";
 
 export default function ForestPage() {
   return (
     <div>
+      <Leva hidden={process.env.NODE_ENV === "production"} />
       <Canvas
         gl={{ antialias: false }}
         camera={{ position: [-10, 13, 25], near: 0.1, far: 100, fov: 30 }}

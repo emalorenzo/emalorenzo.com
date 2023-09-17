@@ -16,11 +16,11 @@ export type GLTFResult = GLTF & {
   };
 };
 
-export const Tree = forwardRef(function TreeFn({ count, ...props }: Props, ref: any) {
+export const InstancedTree = forwardRef(function TreeFn({ count, ...props }: Props, ref: any) {
   const { nodes, materials } = useGLTF("/assets/tree.glb") as GLTFResult;
 
   useLayoutEffect(() => {
-    if (ref?.current) return;
+    if (!ref?.current) return;
 
     ref?.current.geometry.applyMatrix4(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
   }, []);
@@ -37,6 +37,6 @@ export const Tree = forwardRef(function TreeFn({ count, ...props }: Props, ref: 
   );
 });
 
-Tree.defaultProps = {
-  count: 10,
+InstancedTree.defaultProps = {
+  count: 100,
 };
