@@ -1,14 +1,17 @@
 import { Center, MeshTransmissionMaterial, Sampler } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
+import { InstancedRock } from "./instanced-rock";
 import { InstancedTree } from "./instanced-tree";
 import { Terrain } from "./terrain";
 
 const TREES_COUNT = 500;
+const ROCKS_COUNT = 100;
 
 export function Forest() {
   const terrainRef = useRef<THREE.Mesh>(null!);
   const treesRef = useRef<any>(null!);
+  const rocksRef = useRef<any>(null!);
 
   return (
     <Center top>
@@ -25,7 +28,21 @@ export function Forest() {
           return object;
         }}
       />
+      <Sampler
+        mesh={terrainRef}
+        instances={rocksRef}
+        count={ROCKS_COUNT}
+        weight="color"
+        transform={({ position, normal, dummy: object }) => {
+          object.position.copy(position);
+          object.scale.setScalar(0.1 + Math.random() / 3);
+          object.lookAt(normal.add(position));
+          object.updateMatrix();
+          return object;
+        }}
+      />
       <InstancedTree ref={treesRef} count={TREES_COUNT} />
+      <InstancedRock ref={rocksRef} count={ROCKS_COUNT} />
       <Terrain ref={terrainRef} />
 
       {/* lake */}
