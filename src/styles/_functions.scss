@@ -1,0 +1,22 @@
+@use "sass:math";
+@import "./_variables.scss";
+
+@mixin mobile {
+  @media (max-width: #{$mobile-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$mobile-breakpoint}) {
+    @content;
+  }
+}
+
+@function pxClamp($mobile, $size, $max) {
+  @return clamp(#{$mobile}px, calc(#{$size} / 1920 * 100vw), #{$max}px);
+}
+
+@function mobilePxClamp($min, $size, $max) {
+  @return clamp(#{$min}px, calc(#{$size} / 375 * 100vw), #{$max}px);
+}

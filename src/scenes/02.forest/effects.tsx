@@ -12,7 +12,7 @@ export function Effects() {
     effects && (
       <EffectComposer disableNormalPass multisampling={4}>
         <Bloom mipmapBlur intensity={0.5} luminanceThreshold={0.5} />
-        <N8AO aoRadius={20} intensity={3} distanceFalloff={1} screenSpaceRadius />
+        <N8AO aoRadius={20} intensity={3} distanceFalloff={1} screenSpaceRadius halfRes />
       </EffectComposer>
     )
   );
