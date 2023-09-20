@@ -1,5 +1,4 @@
 import { GetStaticProps } from "next";
-import Link from "next/link";
 import { getPostsMetadata } from "~/lib/cms";
 import { PostMeta } from "~/types";
 
@@ -13,12 +12,7 @@ export type Props = {
 export default function HomePage({ posts }: Props) {
   return (
     <Layout posts={posts} className={styles.home}>
-      <h1>posts</h1>
-      {posts.map((post) => (
-        <Link href={`/${post.slug}`} key={post.slug}>
-          <article className="w-20">{post.title}</article>
-        </Link>
-      ))}
+      home
     </Layout>
   );
 }

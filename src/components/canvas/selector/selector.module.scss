@@ -1,0 +1,17 @@
+.wrapper {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+
+  .list {
+    display: flex;
+
+    .item {
+      height: 250px;
+      // width: 100%;
+      aspect-ratio: 16/9;
+      border: 1px solid black;
+    }
+  }
+}
