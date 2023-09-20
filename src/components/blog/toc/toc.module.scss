@@ -1,0 +1,21 @@
+.wrapper {
+  display: none;
+
+  @include desktop {
+    display: block;
+    max-width: 250px;
+    margin-left: auto;
+  }
+
+  .contentList {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    position: sticky;
+
+    a {
+      font-size: 0.8em;
+      margin-top: calc(2rem / 3);
+    }
+  }
+}

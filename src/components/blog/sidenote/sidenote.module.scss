@@ -1,0 +1,19 @@
+.wrapper {
+  margin: 2rem 0;
+  position: relative;
+  border-radius: 0.5rem;
+  padding: 2rem;
+
+  h3 {
+    margin-top: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--sidenote-color);
+    font-weight: 500;
+  }
+}
