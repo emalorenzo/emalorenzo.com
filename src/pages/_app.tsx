@@ -1,17 +1,19 @@
+import { StatsGl } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import type { AppProps } from "next/app";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { Selector } from "~/components/canvas/selector";
+import { PostSelector } from "~/components/canvas/post-selector";
 import { useStore } from "~/lib/store";
 
 import "~/styles/global.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const pathname = usePathname();
   const dom = useRef<HTMLDivElement>(null!);
 
-  const { setDom } = useStore.getState();
+  const { setDom, setSelectedPostIndex } = useStore.getState();
   useEffect(() => {
-    console.log("domElement", dom.current);
     if (dom.current) setDom(dom.current);
   }, [dom, setDom]);
 
@@ -23,8 +25,14 @@ export default function App({ Component, pageProps }: AppProps) {
         style={{ pointerEvents: "none" }}
         eventSource={dom}
         eventPrefix="client"
+        onPointerMissed={() => {
+          // if (pathname === "/") {
+          //   setSelectedPostIndex(null);
+          // }
+        }}
       >
-        <Selector />
+        <PostSelector />
+        <StatsGl />
       </Canvas>
     </div>
   );
