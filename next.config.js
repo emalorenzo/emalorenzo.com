@@ -11,7 +11,6 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     optimizeCss: true,
-    legacyBrowsers: false,
   },
   typescript: {
     ignoreBuildErrors: true,
