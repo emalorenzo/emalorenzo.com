@@ -1,4 +1,5 @@
-import { useFrame } from "@react-three/fiber";
+import { Text } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { useStore } from "~/lib/store";
@@ -16,6 +17,7 @@ const getPosition = (i: number) => i * WIDTH + i * SPACING;
 
 export function PostSelector() {
   const pathname = usePathname();
+  const viewport = useThree((t) => t.viewport);
 
   const { setSelectedPostIndex } = useStore.getState();
   const selectedPostIndex = useStore((s) => s.selectedPostIndex);
@@ -28,6 +30,7 @@ export function PostSelector() {
   const group = useRef<THREE.Group>(null!);
 
   const maxProgress = (posts.length - 1) * WIDTH + (posts.length - 1) * SPACING;
+  const post = selectedPostIndex !== null ? posts[selectedPostIndex] : null;
 
   useLayoutEffect(() => {
     if (selectedPostIndex !== null) {
@@ -37,10 +40,12 @@ export function PostSelector() {
 
   const handleScroll = useCallback(
     (e: WheelEvent) => {
-      progress.current += e.deltaY * SPEED;
-
-      if (selectedPostIndex !== null && pathname === "/") {
-        setSelectedPostIndex(null);
+      if (pathname === "/") {
+        if (selectedPostIndex !== null) {
+          setSelectedPostIndex(null);
+        } else {
+          progress.current += e.deltaY * SPEED;
+        }
       }
     },
     [pathname, selectedPostIndex, setSelectedPostIndex]
@@ -70,17 +75,30 @@ export function PostSelector() {
   });
 
   return (
-    <group ref={group}>
-      {posts?.map((post, i) => (
-        <PostItem
-          key={post.slug}
-          post={post}
-          index={i}
-          position={[getPosition(i), 0, 0]}
-          scale={[WIDTH, HEIGHT, 1]}
-          aspectRatio={ASPECT_RATIO}
-        />
-      ))}
-    </group>
+    <>
+      <group ref={group}>
+        {posts?.map((post, i) => (
+          <PostItem
+            key={post.slug}
+            post={post}
+            index={i}
+            position={[getPosition(i), 0, 0]}
+            scale={[WIDTH, HEIGHT, 1]}
+            aspectRatio={ASPECT_RATIO}
+          />
+        ))}
+      </group>
+      {post && (
+        <Text
+          fontSize={0.25}
+          position={[-1, -viewport.height * 0.3, 0]}
+          color="black"
+          // maxWidth={viewport.width / 2.5}
+          font="/fonts/Satoshi-Regular.woff"
+        >
+          {post.title}
+        </Text>
+      )}
+    </>
   );
 }

@@ -24,13 +24,13 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
 
   const ref = useRef<THREE.Mesh>(null!);
 
-  console.log("selectedIndex", selectedIndex);
-
   const viewport = useThree((t) => t.viewport);
   const selectedHeight = viewport.height * 0.5;
   const selectedWidth = selectedHeight * aspectRatio;
   const targetWidth = selectedIndex !== null ? selectedWidth : scale[0];
   const targetHeight = selectedIndex !== null ? selectedHeight : scale[1];
+
+  const targetYPosition = isSelected && pathname !== "/" ? 0.6 : 0;
 
   const handleClick = () => {
     setSelectedPostIndex(index);
@@ -65,6 +65,7 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
     }
     if (selectedIndex === null || isSelected) {
       ref.current.position.x = damp(ref.current.position.x, position[0], 8, delta);
+      ref.current.position.y = damp(ref.current.position.y, targetYPosition, 8, delta);
     }
   });
 
