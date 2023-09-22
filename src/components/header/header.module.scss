@@ -1,0 +1,16 @@
+.header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: flex-start;
+
+  .title {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+  }
+}
