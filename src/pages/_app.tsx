@@ -1,8 +1,7 @@
 import { Canvas } from "@react-three/fiber";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
-import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { Header } from "~/components/header";
 import { useStore } from "~/lib/store";
@@ -15,7 +14,6 @@ const Pointer = dynamic(() => import("~/components/canvas/pointer").then((m) => 
 import "~/styles/global.scss";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const pathname = usePathname();
   const dom = useRef<HTMLDivElement>(null!);
 
   const { setDom, setSelectedPostIndex } = useStore.getState();
@@ -24,11 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [dom, setDom]);
 
   return (
-    <motion.div
-      ref={dom}
-      className="relative h-screen w-full"
-      animate={{ backgroundColor: pathname === "/" ? "#fff" : "#000" }}
-    >
+    <div ref={dom} className="relative h-screen w-full">
       <Pointer />
       <Header />
       <AnimatePresence mode="wait">
@@ -42,6 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <GlobalScene />
       </Canvas>
-    </motion.div>
+    </div>
   );
 }
