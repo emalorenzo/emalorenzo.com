@@ -3,7 +3,7 @@
 import { Loader, Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
-import Scene from "~/scenes/01.sushi";
+import Scene from "~/scenes/01.sushi/01.sushi";
 
 export default function SushiPage() {
   return (

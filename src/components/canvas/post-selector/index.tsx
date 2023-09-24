@@ -40,13 +40,17 @@ export function PostSelector() {
 
   const handleScroll = useCallback(
     (e: WheelEvent) => {
-      if (pathname === "/") {
-        if (selectedPostIndex !== null) {
-          setSelectedPostIndex(null);
-        } else {
-          progress.current += e.deltaY * SPEED;
-        }
+      // only scroll on the home page
+      if (pathname !== "/") return;
+      // if there was a post selected clear selection
+      if (selectedPostIndex !== null) {
+        setSelectedPostIndex(null);
       }
+
+      const isVerticalScroll = Math.abs(e.deltaY) > Math.abs(e.deltaX);
+      const wheelProgress = isVerticalScroll ? e.deltaY : e.deltaX;
+
+      progress.current += wheelProgress * SPEED;
     },
     [pathname, selectedPostIndex, setSelectedPostIndex]
   );
@@ -91,10 +95,11 @@ export function PostSelector() {
       {post && (
         <Text
           fontSize={0.25}
-          position={[-1, -viewport.height * 0.3, 0]}
+          position={[-viewport.width * 0.2, -viewport.height * 0.3, 0]}
           color="black"
           // maxWidth={viewport.width / 2.5}
           font="/fonts/Satoshi-Regular.woff"
+          anchorX="left"
         >
           {post.title}
         </Text>

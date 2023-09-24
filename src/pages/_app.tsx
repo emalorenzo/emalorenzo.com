@@ -1,11 +1,16 @@
 import { Canvas } from "@react-three/fiber";
 import { AnimatePresence, motion } from "framer-motion";
 import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { PostSelector } from "~/components/canvas/post-selector";
 import { Header } from "~/components/header";
 import { useStore } from "~/lib/store";
+import { GlobalScene } from "~/scenes/globalscene";
+
+const Pointer = dynamic(() => import("~/components/canvas/pointer").then((m) => m.Pointer), {
+  ssr: false,
+});
 
 import "~/styles/global.scss";
 
@@ -24,6 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
       className="relative h-screen w-full"
       animate={{ backgroundColor: pathname === "/" ? "#fff" : "#000" }}
     >
+      <Pointer />
       <Header />
       <AnimatePresence mode="wait">
         <Component {...pageProps} />
@@ -33,13 +39,8 @@ export default function App({ Component, pageProps }: AppProps) {
         style={{ pointerEvents: "none" }}
         eventSource={dom}
         eventPrefix="client"
-        onPointerMissed={() => {
-          // if (pathname === "/") {
-          //   setSelectedPostIndex(null);
-          // }
-        }}
       >
-        <PostSelector />
+        <GlobalScene />
       </Canvas>
     </motion.div>
   );

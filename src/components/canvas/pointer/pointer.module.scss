@@ -1,0 +1,33 @@
+.wrapper {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+
+  .pointer {
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: black;
+    color: white;
+    border-radius: 3rem;
+    transition: opacity, width, height 0.2s ease-in-out;
+    overflow: hidden;
+
+    .mask {
+      padding: 1rem;
+      transition: all 0.3s ease-in-out;
+
+      -webkit-mask-image: linear-gradient(
+        to top,
+        transparent 10%,
+        black 30%,
+        black 60%,
+        transparent 90%
+      );
+      mask-image: linear-gradient to top, black 0%, transparent 120%;
+
+      .content {
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+}

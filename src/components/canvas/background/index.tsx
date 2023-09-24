@@ -7,7 +7,7 @@ type Props = JSX.IntrinsicElements["mesh"];
 
 export function Background({ position, ...props }: Props) {
   const background = useRef<THREE.Mesh>(null!);
-  const { setSelectedPostIndex } = useStore.getState();
+  const { setSelectedPostIndex, setCursor } = useStore.getState();
 
   const viewport = useThree((t) => t.viewport);
   const camera = useThree((t) => t.camera) as THREE.PerspectiveCamera;

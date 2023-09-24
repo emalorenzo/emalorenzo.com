@@ -15,6 +15,7 @@ export type Props = {
 
 export default function HomePage({ posts }: Props) {
   const router = useRouter();
+  const { setSelectedPostIndex } = useStore.getState();
 
   const selectedPostIndex = useStore((s) => s.selectedPostIndex);
   const selectedPost = selectedPostIndex !== null ? posts[selectedPostIndex] : null;

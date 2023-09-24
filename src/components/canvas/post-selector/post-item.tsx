@@ -1,7 +1,7 @@
 import { Image } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import * as THREE from "three";
 import { useStore } from "~/lib/store";
 import { PostMeta } from "~/types";
@@ -19,7 +19,7 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
   const pathname = usePathname();
 
   const selectedIndex = useStore((s) => s.selectedPostIndex);
-  const { setSelectedPostIndex } = useStore.getState();
+  const { setSelectedPostIndex, setCursor } = useStore.getState();
   const isSelected = selectedIndex === index;
 
   const ref = useRef<THREE.Mesh>(null!);
@@ -32,7 +32,34 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
 
   const targetYPosition = isSelected && pathname !== "/" ? 0.6 : 0;
 
-  const handleClick = () => {
+  const isPrevious = selectedIndex !== null && index < selectedIndex;
+  const isNext = selectedIndex !== null && index > selectedIndex;
+
+  if (index === 1) {
+    console.log("isSelected", isSelected);
+  }
+
+  const handleHover = useCallback(() => {
+    console.log("hover");
+
+    switch (true) {
+      case isPrevious: {
+        setCursor("Previous");
+        break;
+      }
+      case isNext: {
+        setCursor("Next");
+        break;
+      }
+      case isSelected: {
+        setCursor("Open");
+        break;
+      }
+    }
+  }, [isSelected, isNext, isPrevious, setCursor]);
+
+  const handleClick = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
     setSelectedPostIndex(index);
   };
 
@@ -47,7 +74,7 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
 
     const distanceToSelected = pathname === "/" ? viewport.width * 0.45 : viewport.width * 0.6;
 
-    if (selectedIndex !== null && index < selectedIndex) {
+    if (isPrevious) {
       ref.current.position.x = damp(
         ref.current.position.x,
         position[0] - distanceToSelected,
@@ -55,7 +82,7 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
         delta
       );
     }
-    if (selectedIndex !== null && index > selectedIndex) {
+    if (isNext) {
       ref.current.position.x = damp(
         ref.current.position.x,
         position[0] + distanceToSelected,
@@ -75,8 +102,12 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
       alt=""
       position={position}
       url={post.image}
-      onClick={handleClick}
       scale={[scale[0], scale[1]]}
+      onClick={handleClick}
+      onPointerOver={handleHover}
+      onPointerLeave={() => {
+        setCursor(null);
+      }}
       {...props}
     />
   );
