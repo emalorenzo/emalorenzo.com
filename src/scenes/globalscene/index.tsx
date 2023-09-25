@@ -1,31 +1,38 @@
 import { useThree } from "@react-three/fiber";
 import { useEffect } from "react";
 import { Background } from "~/components/canvas/background";
-import { PostSelector } from "~/components/canvas/post-selector";
 import { useStore } from "~/lib/store";
 
 export function GlobalScene() {
-  const eventsTarget = useStore((s) => s.eventsTarget);
-  const dom = useStore((s) => s.dom);
+  const eventsTarget = useStore((s) => s.eventsTarget) as HTMLDivElement;
+  const dom = useStore((s) => s.dom) as HTMLDivElement;
+
+  const { setEventsTarget } = useStore.getState();
   const events = useThree((t) => t.events);
 
   useEffect(() => {
-    if (eventsTarget) {
-      events.connect(eventsTarget);
-    } else {
-      events.connect(dom);
+    const connectedId = events.connected?.id;
+
+    const target = eventsTarget || dom;
+    const isConnectedToTarget = connectedId === target.id;
+
+    if (!isConnectedToTarget) {
+      events.connect(target);
+
+      console.log("connected events to", eventsTarget);
     }
 
     return () => {
-      events.connect(dom);
+      // events.connect(dom);
     };
-  }, [eventsTarget, events, dom]);
+  }, [eventsTarget, events, dom, setEventsTarget]);
 
   return (
     <>
       <Background position={[0, 0, -10]} />
-      <PostSelector />
+      {/* <PostSelector /> */}
       <ambientLight />
+      {/* <StatsGl /> */}
     </>
   );
 }

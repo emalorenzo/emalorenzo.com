@@ -1,0 +1,11 @@
+.wrapper {
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 30vmin;
+  flex-direction: column;
+}

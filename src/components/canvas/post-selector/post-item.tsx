@@ -36,13 +36,7 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
   const isPrevious = selectedIndex !== null && index < selectedIndex;
   const isNext = selectedIndex !== null && index > selectedIndex;
 
-  if (index === 1) {
-    console.log("isSelected", isSelected);
-  }
-
   const handleHover = useCallback(() => {
-    console.log("hover");
-
     switch (true) {
       case isPrevious: {
         setCursor("Previous");

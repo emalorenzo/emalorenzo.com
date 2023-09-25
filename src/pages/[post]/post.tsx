@@ -39,6 +39,7 @@ export function Post({ posts, mdx, metadata }: Props) {
     >
       <div
         ref={background}
+        id="post-background"
         className={styles.background}
         onClick={() => router.push("/")}
         onPointerOver={() => setCursor("Close")}
