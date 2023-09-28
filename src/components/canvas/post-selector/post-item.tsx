@@ -1,6 +1,6 @@
 import { Image } from "@react-three/drei";
 import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useRef } from "react";
 import * as THREE from "three";
 import { useStore } from "~/lib/store";
@@ -17,6 +17,7 @@ type Props = JSX.IntrinsicElements["mesh"] & {
 
 export function PostItem({ post, position, index, scale, aspectRatio, ...props }: Props) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const selectedIndex = useStore((s) => s.selectedPostIndex);
   const { setSelectedPostIndex, setCursor } = useStore.getState();
@@ -60,7 +61,12 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
 
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
-    setSelectedPostIndex(index);
+
+    if (isSelected) {
+      router.push(post.slug);
+    } else {
+      setSelectedPostIndex(index);
+    }
   };
 
   useFrame((state, delta) => {

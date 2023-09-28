@@ -24,6 +24,9 @@ type GlobalStore = {
 
   cursor: Cursor | null;
   setCursor: (cursor: Cursor | null) => void;
+
+  eventsTarget: HTMLDivElement | null;
+  setEventsTarget: (target: HTMLDivElement) => void;
 };
 
 export const useStore = create<GlobalStore>((set) => ({
@@ -38,4 +41,7 @@ export const useStore = create<GlobalStore>((set) => ({
 
   cursor: null,
   setCursor: (cursor: Cursor | null) => set({ cursor }),
+
+  eventsTarget: null,
+  setEventsTarget: (target) => set({ eventsTarget: target }),
 }));
