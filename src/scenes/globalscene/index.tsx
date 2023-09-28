@@ -1,4 +1,5 @@
 import { useThree } from "@react-three/fiber";
+import { Perf } from "r3f-perf";
 import { useEffect } from "react";
 import { Background } from "~/components/canvas/background";
 import { useStore } from "~/lib/store";
@@ -30,9 +31,8 @@ export function GlobalScene() {
   return (
     <>
       <Background position={[0, 0, -10]} />
-      {/* <PostSelector /> */}
       <ambientLight />
-      {/* <StatsGl /> */}
+      <Perf position="bottom-left" overClock={true} />
     </>
   );
 }

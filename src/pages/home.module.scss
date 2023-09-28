@@ -3,9 +3,5 @@
   height: 100%;
   width: 100%;
   position: relative;
-
-  .readButton {
-    position: absolute;
-    bottom: 2rem;
-  }
+  pointer-events: none;
 }

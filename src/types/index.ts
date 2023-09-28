@@ -8,3 +8,15 @@ export interface PostMeta {
   background: string;
   scene: string;
 }
+
+export type CursorType =
+  | "Previous"
+  | "Next"
+  | "MINIMIZE"
+  | "MAXIMIZE"
+  | "RESIZE"
+  | "MOVE"
+  | "CLOSE"
+  | "Open"
+  | "DEFAULT"
+  | null;

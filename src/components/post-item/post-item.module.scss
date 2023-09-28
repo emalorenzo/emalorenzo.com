@@ -1,8 +1,7 @@
 .wrapper {
-  height: 800px;
-  aspect-ratio: 16/9;
+  height: calc(var(--item-height) * 1px);
+  width: calc(var(--item-width) * 1px);
   overflow: hidden;
-  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;

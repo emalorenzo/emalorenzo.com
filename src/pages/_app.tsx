@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { DevTools } from "~/components/dev-tools";
 import { Header } from "~/components/header";
-import { PostSelector } from "~/components/post-selector";
 import { useStore } from "~/lib/store";
 import { GlobalScene } from "~/scenes/globalscene";
 
@@ -14,6 +13,12 @@ import "@14islands/r3f-scroll-rig/css";
 const Pointer = dynamic(() => import("~/components/canvas/pointer").then((m) => m.Pointer), {
   ssr: false,
 });
+const PostSelector = dynamic(
+  () => import("~/components/post-selector").then((m) => m.PostSelector),
+  {
+    ssr: false,
+  }
+);
 
 import "~/styles/global.scss";
 

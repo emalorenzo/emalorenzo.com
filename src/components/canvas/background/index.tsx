@@ -7,7 +7,7 @@ type Props = JSX.IntrinsicElements["mesh"];
 
 export function Background({ position, ...props }: Props) {
   const background = useRef<THREE.Mesh>(null!);
-  const { setSelectedPostIndex, setCursor } = useStore.getState();
+  const { setSelectedPostIndex } = useStore.getState();
 
   const viewport = useThree((t) => t.viewport);
   const camera = useThree((t) => t.camera) as THREE.PerspectiveCamera;
@@ -24,7 +24,11 @@ export function Background({ position, ...props }: Props) {
       {...props}
     >
       <planeGeometry args={[offsetViewport.width, offsetViewport.height, 1, 1]} />
-      <meshBasicMaterial transparent opacity={0} />
+      <meshBasicMaterial
+        // transparent
+        // opacity={0}
+        wireframe
+      />
     </mesh>
   );
 }

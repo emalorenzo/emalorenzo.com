@@ -23,11 +23,7 @@ export function Layout({ children, posts, ...props }: PropsWithChildren<Props>) 
 
   return (
     <SmoothScrollbar enabled={enableWebGL} config={{ smoothTouch: enableSmoothTouchScroll }}>
-      {(bind) => (
-        <motion.main {...props} {...bind}>
-          {children}
-        </motion.main>
-      )}
+      {(bind) => <motion.main {...props}>{children}</motion.main>}
     </SmoothScrollbar>
   );
 }

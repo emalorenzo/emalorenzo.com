@@ -1,9 +1,8 @@
 import { Image } from "@react-three/drei";
-import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
-import { usePathname, useRouter } from "next/navigation";
+import { useFrame, useThree } from "@react-three/fiber";
+import { usePathname } from "next/navigation";
 import { useCallback, useRef } from "react";
 import * as THREE from "three";
-import { useStore } from "~/lib/store";
 import { PostMeta } from "~/types";
 
 const damp = THREE.MathUtils.damp;
@@ -17,11 +16,6 @@ type Props = JSX.IntrinsicElements["mesh"] & {
 
 export function PostItem({ post, position, index, scale, aspectRatio, ...props }: Props) {
   const pathname = usePathname();
-  const router = useRouter();
-
-  const selectedIndex = useStore((s) => s.selectedPostIndex);
-  const { setSelectedPostIndex, setCursor } = useStore.getState();
-  const isSelected = selectedIndex === index;
 
   const ref = useRef<THREE.Mesh>(null!);
 
@@ -33,35 +27,7 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
 
   const targetYPosition = isSelected && pathname !== "/" ? 0.6 : 0;
 
-  const isPrevious = selectedIndex !== null && index < selectedIndex;
-  const isNext = selectedIndex !== null && index > selectedIndex;
-
-  const handleHover = useCallback(() => {
-    switch (true) {
-      case isPrevious: {
-        setCursor("Previous");
-        break;
-      }
-      case isNext: {
-        setCursor("Next");
-        break;
-      }
-      case isSelected: {
-        setCursor("Open");
-        break;
-      }
-    }
-  }, [isSelected, isNext, isPrevious, setCursor]);
-
-  const handleClick = (e: ThreeEvent<MouseEvent>) => {
-    e.stopPropagation();
-
-    if (isSelected) {
-      router.push(post.slug);
-    } else {
-      setSelectedPostIndex(index);
-    }
-  };
+  const handleHover = useCallback(() => {}, [isSelected, isNext, isPrevious]);
 
   useFrame((state, delta) => {
     const width = damp(ref.current.scale.x, targetWidth, 8, delta);
@@ -103,11 +69,6 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
       position={position}
       url={post.image}
       scale={[scale[0], scale[1]]}
-      onClick={handleClick}
-      onPointerOver={handleHover}
-      onPointerLeave={() => {
-        setCursor(null);
-      }}
       {...props}
     />
   );

@@ -14,7 +14,7 @@ export function Post({ posts, mdx, metadata }: Props) {
   const background = useRef<HTMLDivElement>(null!);
 
   const selectedPostIndex = useStore((s) => s.selectedPostIndex);
-  const { setSelectedPostIndex, setCursor, setEventsTarget } = useStore.getState();
+  const { setSelectedPostIndex, setEventsTarget } = useStore.getState();
 
   useLayoutEffect(() => {
     const postIndex = posts.findIndex((p) => p.slug === params?.post);
@@ -42,11 +42,10 @@ export function Post({ posts, mdx, metadata }: Props) {
         id="post-background"
         className={styles.background}
         onClick={() => router.push("/")}
-        onPointerOver={() => setCursor("Close")}
       ></div>
       <motion.article
         initial={{ y: 0 }}
-        animate={{ y: -200 }}
+        animate={{ y: -500 }}
         exit={{ y: 0 }}
         transition={{ duration: 0.5 }}
       >

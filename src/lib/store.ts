@@ -1,17 +1,6 @@
 import { create } from "zustand";
 import { PostMeta } from "~/types";
 
-type Cursor =
-  | "PREVIOUS"
-  | "NEXT"
-  | "MINIMIZE"
-  | "MAXIMIZE"
-  | "RESIZE"
-  | "MOVE"
-  | "CLOSE"
-  | "OPEN"
-  | "DEFAULT";
-
 type GlobalStore = {
   dom: HTMLDivElement | null;
   setDom: (dom: HTMLDivElement) => void;
@@ -21,9 +10,6 @@ type GlobalStore = {
 
   selectedPostIndex: number | null;
   setSelectedPostIndex: (index: number | null) => void;
-
-  cursor: Cursor | null;
-  setCursor: (cursor: Cursor | null) => void;
 
   eventsTarget: HTMLDivElement | null;
   setEventsTarget: (target: HTMLDivElement | null) => void;
@@ -38,9 +24,6 @@ export const useStore = create<GlobalStore>((set) => ({
 
   selectedPostIndex: null,
   setSelectedPostIndex: (index) => set({ selectedPostIndex: index }),
-
-  cursor: null,
-  setCursor: (cursor: Cursor | null) => set({ cursor }),
 
   eventsTarget: null,
   setEventsTarget: (target: HTMLDivElement | null) => set({ eventsTarget: target }),
