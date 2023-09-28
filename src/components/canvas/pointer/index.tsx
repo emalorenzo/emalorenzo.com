@@ -1,28 +1,42 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useRef } from "react";
-import { useStore } from "~/lib/store";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { CursorType } from "~/types";
 import styles from "./pointer.module.scss";
 
 export function Pointer() {
   const ref = useRef<HTMLDivElement>(null!);
+  const [cursor, setCursor] = useState<CursorType>(null);
 
-  const cursor = useStore((s) => s.cursor);
+  const animateMove = (e: MouseEvent, interacting: boolean) => {
+    const offsetX = interacting ? 0 : 10;
+    const offsetY = interacting ? 0 : 10;
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    const offsetX = 10;
-    const offsetY = 10;
-
-    const targetX = e.clientX + offsetX;
-    const targetY = e.clientY + offsetY;
+    const targetX = e.clientX - ref.current.offsetWidth / 2 + offsetX;
+    const targetY = e.clientY - ref.current.offsetHeight / 2 + offsetY;
 
     const keyframes = {
       transform: `translate(${targetX}px, ${targetY}px)`,
+      ease: "linear",
     };
     ref.current.animate(keyframes, {
       duration: 800,
       easing: "linear",
       fill: "forwards",
     });
+  };
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    const interactable = e?.target?.closest("[data-interactable]");
+    const interacting = interactable !== null;
+
+    if (interacting) {
+      const type = interactable.dataset.type;
+      setCursor(type as CursorType);
+    } else {
+      setCursor(null);
+    }
+
+    animateMove(e, interacting);
   }, []);
 
   useEffect(() => {
@@ -44,28 +58,30 @@ export function Pointer() {
 
   return (
     <div ref={ref} className={styles.wrapper}>
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          key={cursor}
-          className={styles.pointer}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.div className={styles.mask} animate={{ padding: !!cursor ? "1rem" : "4px" }}>
-            <motion.div
-              className={styles.content}
-              initial={{ y: "150%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "150%" }}
-              transition={{ duration: 0.3 }}
-            >
-              {cursor}
-            </motion.div>
-          </motion.div>
+      <motion.div
+        key={cursor}
+        className={styles.pointer}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.1 }}
+      >
+        <motion.div className={styles.mask}>
+          <AnimatePresence mode="wait">
+            {!!cursor && (
+              <motion.div
+                className={styles.content}
+                initial={{ opacity: 0, y: "110%" }}
+                animate={{ opacity: 1, y: "0%" }}
+                exit={{ opacity: 0, y: "-110%" }}
+                transition={{ duration: 0.2 }}
+              >
+                {cursor}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
-      </AnimatePresence>
+      </motion.div>
     </div>
   );
 }

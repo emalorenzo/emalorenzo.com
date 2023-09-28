@@ -39,6 +39,7 @@
     "gray-matter": "^4.0.3",
     "next-mdx-remote": "^4.4.1",
     "postcss": "^8.4.30",
+    "r3f-perf": "^7.1.2",
     "raw-loader": "^4.0.2",
     "react-icons": "^4.11.0",
     "rehype-autolink-headings": "^7.0.0",
