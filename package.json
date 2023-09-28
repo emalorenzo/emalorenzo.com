@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@14islands/r3f-scroll-rig": "^8.12.3",
     "@andersonmancini/lens-flare": "^1.0.1",
     "@react-three/drei": "^9.80.2",
     "@react-three/fiber": "^8.13.6",
@@ -39,7 +38,6 @@
     "gray-matter": "^4.0.3",
     "next-mdx-remote": "^4.4.1",
     "postcss": "^8.4.30",
-    "r3f-perf": "^7.1.2",
     "raw-loader": "^4.0.2",
     "react-icons": "^4.11.0",
     "rehype-autolink-headings": "^7.0.0",

@@ -2,7 +2,6 @@
   position: fixed;
   z-index: 1000;
   pointer-events: none;
-  transition: opacity 0.2s ease-in-out;
 
   .pointer {
     position: absolute;
@@ -10,11 +9,11 @@
     background-color: black;
     color: white;
     border-radius: 3rem;
-    transition: width, height 0.2s ease-in-out;
+    transition: opacity, width, height 0.2s ease-in-out;
     overflow: hidden;
 
     .mask {
-      padding: 4px;
+      padding: 1rem;
       transition: all 0.3s ease-in-out;
 
       -webkit-mask-image: linear-gradient(
@@ -27,7 +26,6 @@
       mask-image: linear-gradient to top, black 0%, transparent 120%;
 
       .content {
-        padding: 1rem;
         transition: all 0.3s ease-in-out;
       }
     }

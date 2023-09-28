@@ -1,5 +1,4 @@
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import Link from "next/link";
 import { Figure } from "~/components/blog/figure";
 import { SideNote } from "~/components/blog/sidenote";
 import { TableOfContents } from "~/components/blog/toc";
@@ -19,7 +18,7 @@ export const MDX = ({ source }: Props) => {
         //   p: Typography.Paragraph,
         //   blockquote: Typography.Blockquote,
         //   a: Link,
-        Link,
+        // Link,
         Figure,
         SideNote,
         TableOfContents,
