@@ -1,5 +1,5 @@
 import { PerspectiveCamera, Stage, StatsGl } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { Effects } from "./effects";
 import { Environment } from "./environment";
@@ -9,8 +9,6 @@ const CAMERA_POSITION = new Vector3(0, 20, 70);
 const TARGET_CAMERA_POSITION = new Vector3(10, 18, -22);
 
 export default function ForestScene() {
-  const { camera, scene } = useThree((t) => t);
-
   useFrame(({ pointer, camera }) => {
     const x = CAMERA_POSITION.x + pointer.x * 20;
     const y = CAMERA_POSITION.y + pointer.y * 20;

@@ -14,6 +14,10 @@ export function Background({ position, ...props }: Props) {
 
   const offsetViewport = viewport.getCurrentViewport(camera, position as THREE.Vector3);
 
+  const handleHover = () => {
+    setCursor(null);
+  };
+
   return (
     <mesh
       ref={background}
@@ -21,6 +25,7 @@ export function Background({ position, ...props }: Props) {
       onClick={() => {
         setSelectedPostIndex(null);
       }}
+      onPointerOver={handleHover}
       {...props}
     >
       <planeGeometry args={[offsetViewport.width, offsetViewport.height, 1, 1]} />

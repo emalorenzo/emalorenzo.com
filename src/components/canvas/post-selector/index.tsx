@@ -1,6 +1,6 @@
 import { Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { useStore } from "~/lib/store";
 
@@ -17,7 +17,10 @@ const getPosition = (i: number) => i * WIDTH + i * SPACING;
 
 export function PostSelector() {
   const pathname = usePathname();
+  const params = useParams();
+
   const viewport = useThree((t) => t.viewport);
+  const events = useThree((t) => t.events);
 
   const { setSelectedPostIndex } = useStore.getState();
   const selectedPostIndex = useStore((s) => s.selectedPostIndex);
@@ -62,6 +65,12 @@ export function PostSelector() {
       dom?.removeEventListener("wheel", handleScroll);
     };
   }, [dom, handleScroll]);
+
+  useEffect(() => {
+    if (params?.post && events && events.disconnect) {
+      events.disconnect();
+    }
+  }, [params]);
 
   useFrame((_, delta) => {
     progress.current = THREE.MathUtils.clamp(progress.current, 0, maxProgress);

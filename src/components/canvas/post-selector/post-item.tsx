@@ -1,6 +1,6 @@
 import { Image } from "@react-three/drei";
 import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useCallback, useRef } from "react";
 import * as THREE from "three";
 import { useStore } from "~/lib/store";
@@ -18,6 +18,7 @@ type Props = JSX.IntrinsicElements["mesh"] & {
 export function PostItem({ post, position, index, scale, aspectRatio, ...props }: Props) {
   const pathname = usePathname();
   const router = useRouter();
+  const params = useParams();
 
   const selectedIndex = useStore((s) => s.selectedPostIndex);
   const { setSelectedPostIndex, setCursor } = useStore.getState();
@@ -36,28 +37,27 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
   const isPrevious = selectedIndex !== null && index < selectedIndex;
   const isNext = selectedIndex !== null && index > selectedIndex;
 
-  if (index === 1) {
-    console.log("isSelected", isSelected);
-  }
+  const handleHover = useCallback(
+    (e: ThreeEvent<MouseEvent>) => {
+      e.stopPropagation();
 
-  const handleHover = useCallback(() => {
-    console.log("hover");
-
-    switch (true) {
-      case isPrevious: {
-        setCursor("Previous");
-        break;
+      switch (true) {
+        case isPrevious: {
+          setCursor("Previous");
+          break;
+        }
+        case isNext: {
+          setCursor("Next");
+          break;
+        }
+        case isSelected: {
+          setCursor("Open");
+          break;
+        }
       }
-      case isNext: {
-        setCursor("Next");
-        break;
-      }
-      case isSelected: {
-        setCursor("Open");
-        break;
-      }
-    }
-  }, [isSelected, isNext, isPrevious, setCursor]);
+    },
+    [isSelected, isNext, isPrevious, setCursor]
+  );
 
   const handleClick = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
@@ -66,6 +66,7 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
       router.push(post.slug);
     } else {
       setSelectedPostIndex(index);
+      setCursor("Open");
     }
   };
 
@@ -111,9 +112,6 @@ export function PostItem({ post, position, index, scale, aspectRatio, ...props }
       scale={[scale[0], scale[1]]}
       onClick={handleClick}
       onPointerOver={handleHover}
-      onPointerLeave={() => {
-        setCursor(null);
-      }}
       {...props}
     />
   );

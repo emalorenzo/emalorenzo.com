@@ -6,5 +6,5 @@ export interface PostMeta {
   summary: string;
   image: string;
   background: string;
-  scene: string;
+  scene?: string;
 }

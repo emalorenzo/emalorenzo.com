@@ -18,17 +18,18 @@ export default function App({ Component, pageProps }: AppProps) {
   const pathname = usePathname();
   const dom = useRef<HTMLDivElement>(null!);
 
-  const { setDom, setSelectedPostIndex } = useStore.getState();
+  const { setDom, setCursor } = useStore.getState();
   useEffect(() => {
     if (dom.current) setDom(dom.current);
   }, [dom, setDom]);
 
   return (
-    <div ref={dom} className="relative w-full h-screen">
+    <div ref={dom} id="dom" className="relative w-full h-screen">
       <Pointer />
       <Header />
+
       <AnimatePresence mode="wait">
-        <Component {...pageProps} />
+        <Component {...pageProps} key={Component.name} />
       </AnimatePresence>
       <Canvas
         className="!fixed h-full w-full top-0"
