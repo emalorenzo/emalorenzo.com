@@ -7,7 +7,7 @@ type Props = {
 
 export function RootLayout({ children }: Props) {
   return (
-    <div className="app h-screen relative">
+    <div className="app h-screen w-full relative">
       <Header />
       <MiniMap />
       {children}
