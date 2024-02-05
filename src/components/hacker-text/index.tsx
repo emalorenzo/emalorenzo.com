@@ -58,7 +58,8 @@ export function HackerText({ children, className, active, ...props }: Props) {
 
   return (
     <div className={clsx(styles.text, className)} {...props}>
-      {text}
+      <span className={styles.animatedText}>{text}</span>
+      <span className={styles.spacerText}>{children}</span>
     </div>
   );
 }

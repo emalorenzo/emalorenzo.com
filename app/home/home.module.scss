@@ -3,12 +3,14 @@
   // margin-right: var(--layout-transition-threshold);
 
   .about {
-    height: 300px;
+    height: 200px;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 2rem;
+    border-bottom: 1px solid #ccc;
 
     p {
       max-width: 800px;
@@ -19,10 +21,11 @@
     .links {
       display: flex;
       gap: 1rem;
-
-      a {
-        font-size: 0.9rem;
-      }
     }
   }
+}
+
+.link {
+  @apply text-xs;
+  pointer-events: none;
 }

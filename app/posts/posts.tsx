@@ -36,20 +36,16 @@ export function Posts({ posts }: Props) {
   const isVisible = useRouteVisible();
 
   return (
-    posts.length && (
-      // <SmoothScroll className={styles.wrapper}>
-      <AnimatePresence mode="wait">
-        {isVisible && (
-          <section className={styles.posts}>
-            {posts.map((post, i) => {
-              const status = getStatus(post);
+    <AnimatePresence mode="wait">
+      {isVisible && posts.length && (
+        <section className={styles.posts}>
+          {posts.map((post, i) => {
+            const status = getStatus(post);
 
-              return <PostItem key={i} post={post} status={status} />;
-            })}
-          </section>
-        )}
-      </AnimatePresence>
-      // </SmoothScroll>
-    )
+            return <PostItem key={i} post={post} status={status} />;
+          })}
+        </section>
+      )}
+    </AnimatePresence>
   );
 }

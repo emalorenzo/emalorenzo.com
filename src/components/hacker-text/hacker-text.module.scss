@@ -3,4 +3,15 @@
   font-size: 2rem;
   font-family: var(--font-mono), monospace;
   font-weight: 400;
+  position: relative;
+
+  .animatedText {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .spacerText {
+    visibility: hidden;
+  }
 }

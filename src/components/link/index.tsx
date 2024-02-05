@@ -10,7 +10,9 @@ type Props = LinkProps<{}> & {
   children: React.ReactNode;
   className?: string;
   navigationOptions?: NavigationOptions;
-} & NavigationOptions;
+} & NavigationOptions &
+  JSX.IntrinsicElements["a"] &
+  JSX.IntrinsicElements["button"];
 
 export const Link = forwardRef(
   ({ href, children, navigationOptions, ...props }: Props, ref: React.Ref<any>) => {

@@ -1,11 +1,12 @@
 import { Link } from "~/components/link";
+import { HackerText } from "../hacker-text";
 import styles from "./header.module.scss";
 
 export function Header() {
   return (
     <header className={styles.header}>
       <Link href="/" navigationOptions={{ delay: 700 }}>
-        <h3 className={styles.title}>emalorenzo</h3>
+        <HackerText className={styles.title}>EMALORENZO</HackerText>
       </Link>
       {/* <nav className={styles.nav}>
         <ul>

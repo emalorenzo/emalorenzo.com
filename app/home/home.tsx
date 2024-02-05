@@ -5,6 +5,8 @@ import { SmoothScroll } from "~/layout/smooth-scroll";
 import { PostMeta } from "~/types";
 import { Posts } from "../posts/posts";
 
+import { useState } from "react";
+import { HackerText } from "~/components/hacker-text";
 import { Link } from "~/components/link";
 import styles from "./home.module.scss";
 
@@ -13,9 +15,18 @@ type Props = {
 };
 
 function ExternalLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <Link href={href} className="flex">
-      {children} <FiArrowUpRight size={24} />
+    <Link
+      href={href}
+      className="flex text-xs items-center"
+      onPointerOver={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+    >
+      <HackerText className={styles.link} active={hovered}>
+        {children}
+      </HackerText>{" "}
+      <FiArrowUpRight size={16} />
     </Link>
   );
 }
