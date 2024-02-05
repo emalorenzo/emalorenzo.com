@@ -63,7 +63,15 @@ export function PostItem({ post, status, ...props }: Props) {
           <HackerText active={hovered} className={styles.title}>
             {post.title}
           </HackerText>
-          <h3 className={styles.summary}>{post.summary}</h3>
+          <motion.h3
+            className={styles.summary}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            {post.summary}
+          </motion.h3>
         </motion.div>
       </article>
     </Link>

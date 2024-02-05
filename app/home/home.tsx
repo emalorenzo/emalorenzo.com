@@ -5,6 +5,7 @@ import { SmoothScroll } from "~/layout/smooth-scroll";
 import { PostMeta } from "~/types";
 import { Posts } from "../posts/posts";
 
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { HackerText } from "~/components/hacker-text";
 import { Link } from "~/components/link";
@@ -35,11 +36,11 @@ export function Home({ posts }: Props) {
   return (
     <SmoothScroll className={styles.page}>
       <section className={styles.about}>
-        <p>
+        <motion.p>
           EMANUEL LORENZO IS A CREATIVE DEVELOPER FOCUSING ON 3D, INTERACTION & SMOOTH ANIMATIONS.
           <br />
           BASED IN BUENOS AIRES / WORKING REMOTELY WORLDWIDE.
-        </p>
+        </motion.p>
         <div className={styles.links}>
           <ExternalLink href="mailto:hello@emalorenzo.com">EMAIL</ExternalLink>
           <ExternalLink href="https://www.linkedin.com/in/emanuellorenzo/">LINKEDIN</ExternalLink>
