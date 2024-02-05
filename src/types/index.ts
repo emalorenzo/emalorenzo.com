@@ -7,4 +7,5 @@ export interface PostMeta {
   image: string;
   background: string;
   scene?: string;
+  order: number;
 }

@@ -44,6 +44,10 @@ export const getPostsMetadata = async () => {
     return `${fileName}`;
   };
 
+  const orderedPosts = posts.sort(
+    (a, b) => Number(new Date(a.frontMatter.order)) - Number(new Date(b.frontMatter.order))
+  );
+
   const postsMetadata = posts.map((post, i) => ({
     ...post.frontMatter,
     slug: getSlug(files[i]),
