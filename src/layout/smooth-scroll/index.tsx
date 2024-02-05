@@ -18,7 +18,6 @@ export function SmoothScroll({ children, className }: Props) {
 
   useEffect(() => {
     if (wrapperRef.current && contentRef.current) {
-      console.log("creating lenis");
       const lenis = new Lenis({
         lerp: 0.1,
         duration: 1.2,

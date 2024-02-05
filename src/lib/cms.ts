@@ -36,22 +36,16 @@ export const getPostsMetadata = async () => {
 
   // get all posts contents
   const getAllPosts = files.map((file) => getMDX(`posts/${file}`));
-  const posts = await Promise.all(getAllPosts);
+  const rawPosts = await Promise.all(getAllPosts);
 
-  // use filename as slug
-  const getSlug = (file: string) => {
-    const fileName = file.replace(".mdx", "");
-    return `${fileName}`;
-  };
-
-  const orderedPosts = posts.sort(
-    (a, b) => Number(new Date(a.frontMatter.order)) - Number(new Date(b.frontMatter.order))
-  );
-
-  const postsMetadata = posts.map((post, i) => ({
+  const postsWithSlug = rawPosts.map((post, i) => ({
     ...post.frontMatter,
-    slug: getSlug(files[i]),
+    slug: files[i].replace(".mdx", ""),
   }));
 
-  return postsMetadata;
+  const orderedPosts = postsWithSlug.sort(
+    (a, b) => Number(new Date(a.order)) - Number(new Date(b.order))
+  );
+
+  return orderedPosts;
 };

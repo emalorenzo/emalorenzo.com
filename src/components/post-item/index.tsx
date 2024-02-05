@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { HackerText } from "~/components/hacker-text";
 import { PostMeta } from "~/types";
 
@@ -21,10 +21,6 @@ export function PostItem({ post, status, ...props }: Props) {
   const { setHoveredPost, setActivePost } = useStore.getState();
 
   const targetURL = `/posts/${post.slug}`;
-
-  useEffect(() => {
-    console.log("hovered", hovered);
-  }, [hovered]);
 
   const handleHover = () => {
     setHovered(true);
