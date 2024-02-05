@@ -36,7 +36,7 @@ export function Home({ posts }: Props) {
     <SmoothScroll className={styles.page}>
       <section className={styles.about}>
         <p>
-          EMANUEL LORENZO IS A CREATIVE DEVELOPER FOCUSING ON 3D / INTERACTION / SMOOTH ANIMATIONS.
+          EMANUEL LORENZO IS A CREATIVE DEVELOPER FOCUSING ON 3D, INTERACTION & SMOOTH ANIMATIONS.
           <br />
           BASED IN BUENOS AIRES / WORKING REMOTELY WORLDWIDE.
         </p>
