@@ -1,0 +1,8 @@
+.page {
+  height: calc(100% - var(--layout-threshold-top));
+  min-height: calc(100% - var(--layout-threshold-top));
+  max-height: calc(100% - var(--layout-threshold-top));
+  margin-top: var(--layout-threshold-top);
+  overflow-y: auto;
+  flex: 1;
+}

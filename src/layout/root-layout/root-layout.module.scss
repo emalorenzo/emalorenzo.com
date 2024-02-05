@@ -1,0 +1,19 @@
+.miniMap {
+  position: fixed;
+  height: 100vh;
+  width: var(--layout-minimap-width);
+  border-right: 1px solid #ccc;
+  pointer-events: none;
+}
+
+// .borderRight {
+//   position: fixed;
+//   right: 0px;
+//   top: 0px;
+//   height: 100vh;
+//   z-index: -1;
+//   width: var(--layout-transition-threshold);
+//   // background-color: black;
+//   border-left: 1px solid #ccc;
+//   pointer-events: none;
+// }

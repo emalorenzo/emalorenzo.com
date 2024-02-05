@@ -1,0 +1,16 @@
+.wrapper {
+  margin-left: var(--layout-minimap-width);
+  // margin-right: var(--layout-transition-threshold);
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 800px;
+  gap: 2rem;
+  padding: 2rem;
+  position: relative;
+}

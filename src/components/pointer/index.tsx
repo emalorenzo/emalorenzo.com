@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef } from "react";
-import { useStore } from "~/lib/store";
+import { useStore } from "~/store/store";
 import styles from "./pointer.module.scss";
 
 export function Pointer() {

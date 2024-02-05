@@ -19,7 +19,7 @@ html {
   text-align: center;
   // background-color: var(--purple-background);
   // color: var(--light-gray);
-  scrollbar-width: thin;
+  // scrollbar-width: 0px;
 }
 
 html,
@@ -61,6 +61,7 @@ svg.icon {
   }
 }
 
+html,
 body,
 div,
 section,
@@ -71,19 +72,12 @@ main {
     height: 4px;
   }
   &::-webkit-scrollbar-track {
-    background-color: rgba(186, 188, 210, 0.2);
-    border-radius: 2px;
+    background-color: #ccc;
     overflow: hidden;
   }
   &::-webkit-scrollbar-thumb {
-    background: linear-gradient(
-      0deg,
-      rgba(186, 188, 210, 0) 0%,
-      rgba(186, 188, 210, 1) 20%,
-      rgba(186, 188, 210, 1) 80%,
-      rgba(186, 188, 210, 0) 100%
-    );
-    border-radius: 2px;
+    background: black;
+    // border-radius: 2px;
 
     &:horizontal {
       background: linear-gradient(
@@ -110,4 +104,33 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: #ffffff;
   -webkit-box-shadow: none;
   transition: background-color 5000s ease-in-out 0s;
+}
+
+/** Lenis **/
+html {
+  .lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+}
+
+:root {
+  --layout-threshold-top: 50px;
+  --layout-threshold-right: 0px;
+  --layout-minimap-width: 50px;
+  --layout-transition-threshold: 20px;
 }

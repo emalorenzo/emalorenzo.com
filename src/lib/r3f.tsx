@@ -4,7 +4,7 @@ import tunnel from "tunnel-rat";
 
 export const R3F = tunnel();
 
-export const Three = ({ children }) => {
+export const Three = ({ children }: any) => {
   return <R3F.In>{children}</R3F.In>;
 };
 

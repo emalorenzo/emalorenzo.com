@@ -1,24 +1,19 @@
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
-import { useStore } from "~/lib/store";
+import { Link } from "~/components/link";
 import styles from "./header.module.scss";
 
 export function Header() {
-  const pathname = usePathname();
-
-  const posts = useStore((s) => s.posts);
-  const selectedPostIndex = useStore((s) => s.selectedPostIndex);
-
-  const post = selectedPostIndex !== null ? posts[selectedPostIndex] : null;
-
   return (
-    <motion.header
-      className={styles.header}
-      initial={{ y: "-100%" }}
-      animate={{ y: pathname !== "/" ? 0 : "-100%" }}
-      transition={{ duration: 0.5 }}
-    >
-      <h3 className={styles.title}>{post?.title}</h3>
-    </motion.header>
+    <header className={styles.header}>
+      <Link href="/" navigationOptions={{ delay: 700 }}>
+        <h3 className={styles.title}>emalorenzo</h3>
+      </Link>
+      {/* <nav className={styles.nav}>
+        <ul>
+          <Link href="/posts">posts</Link>
+          <Link href="/shaders">shaders</Link>
+          <Link href="/scenes">scenes</Link>
+        </ul>
+      </nav> */}
+    </header>
   );
 }

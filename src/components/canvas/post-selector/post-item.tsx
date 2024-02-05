@@ -3,7 +3,7 @@ import { ThreeEvent, useFrame, useThree } from "@react-three/fiber";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useCallback, useRef } from "react";
 import * as THREE from "three";
-import { useStore } from "~/lib/store";
+import { useStore } from "~/store/store";
 import { PostMeta } from "~/types";
 
 const damp = THREE.MathUtils.damp;

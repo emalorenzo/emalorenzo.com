@@ -1,7 +1,7 @@
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
-import { useStore } from "~/lib/store";
+import { useStore } from "~/store/store";
 
 type Props = JSX.IntrinsicElements["mesh"];
 

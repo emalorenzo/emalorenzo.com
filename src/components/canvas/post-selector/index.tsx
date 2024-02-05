@@ -2,7 +2,7 @@ import { Text } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useParams, usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
-import { useStore } from "~/lib/store";
+import { useStore } from "~/store/store";
 
 import * as THREE from "three";
 import { PostItem } from "./post-item";

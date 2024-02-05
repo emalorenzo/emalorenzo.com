@@ -2,8 +2,8 @@ import { Loader, Preload } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 import { Suspense } from "react";
-import { useStore } from "~/lib/store";
 import Scene from "~/scenes/03.instanced-attributes";
+import { useStore } from "~/store/store";
 
 export default function InstancedAttributesPage() {
   const dom: HTMLDivElement | null = useStore((s) => s.dom);

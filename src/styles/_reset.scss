@@ -30,6 +30,7 @@ html {
 *::before,
 *::after {
   box-sizing: border-box !important;
+  margin: 0;
 }
 
 /* Remove list styles (bullets/numbers) */
