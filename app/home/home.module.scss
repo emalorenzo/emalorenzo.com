@@ -1,0 +1,28 @@
+.page {
+  margin-left: var(--layout-minimap-width);
+  // margin-right: var(--layout-transition-threshold);
+
+  .about {
+    height: 300px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    p {
+      max-width: 800px;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .links {
+      display: flex;
+      gap: 1rem;
+
+      a {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

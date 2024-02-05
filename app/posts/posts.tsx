@@ -7,7 +7,6 @@ import { AnimatePresence } from "framer-motion";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useRouteVisible } from "~/hooks/useRouteVisible";
-import { SmoothScroll } from "~/layout/smooth-scroll";
 import { useStore } from "~/store/store";
 import styles from "./posts.module.scss";
 
@@ -38,19 +37,19 @@ export function Posts({ posts }: Props) {
 
   return (
     posts.length && (
-      <SmoothScroll className={styles.wrapper}>
-        <AnimatePresence mode="wait">
-          {isVisible && (
-            <section className={styles.posts}>
-              {posts.map((post, i) => {
-                const status = getStatus(post);
+      // <SmoothScroll className={styles.wrapper}>
+      <AnimatePresence mode="wait">
+        {isVisible && (
+          <section className={styles.posts}>
+            {posts.map((post, i) => {
+              const status = getStatus(post);
 
-                return <PostItem key={i} post={post} status={status} />;
-              })}
-            </section>
-          )}
-        </AnimatePresence>
-      </SmoothScroll>
+              return <PostItem key={i} post={post} status={status} />;
+            })}
+          </section>
+        )}
+      </AnimatePresence>
+      // </SmoothScroll>
     )
   );
 }

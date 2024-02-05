@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HackerText } from "~/components/hacker-text";
 import { PostMeta } from "~/types";
 
@@ -15,13 +15,16 @@ type Props = {
 
 export function PostItem({ post, status, ...props }: Props) {
   const ref = useRef<HTMLDivElement>(null!);
-  const textWrapperRef = useRef<HTMLDivElement>(null!);
   const [hovered, setHovered] = useState(false);
   const useWebGL = useStore((state) => state.useWebGL);
   const activePost = useStore((state) => state.activePost);
   const { setHoveredPost, setActivePost } = useStore.getState();
 
   const targetURL = `/posts/${post.slug}`;
+
+  useEffect(() => {
+    console.log("hovered", hovered);
+  }, [hovered]);
 
   const handleHover = () => {
     setHovered(true);
@@ -55,7 +58,6 @@ export function PostItem({ post, status, ...props }: Props) {
       >
         <div className={clsx(styles.view, useWebGL && "opacity-0")} />
         <motion.div
-          ref={textWrapperRef}
           className={styles.textWrapper}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

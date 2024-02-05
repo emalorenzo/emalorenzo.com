@@ -1,14 +1,8 @@
 import { getPostsMetadata } from "~/lib/cms";
-import { PostMeta } from "~/types";
-import { Posts } from "./posts/posts";
-
-type Props = {
-  children: React.ReactNode;
-  posts: PostMeta[];
-};
+import { Home } from "./home/home";
 
 export default async function HomePage() {
   const posts = await getPostsMetadata();
 
-  return <Posts posts={posts} />;
+  return <Home posts={posts} />;
 }

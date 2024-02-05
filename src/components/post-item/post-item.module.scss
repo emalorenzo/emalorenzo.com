@@ -15,6 +15,7 @@
     height: 180px;
     flex-shrink: 0;
     background-color: black;
+    pointer-events: none;
 
     @include desktop {
       width: 300px;
@@ -28,6 +29,7 @@
     justify-content: center;
     align-items: flex-start;
     padding: 1rem;
+    pointer-events: none;
 
     .title {
       font-size: 1.5rem;
