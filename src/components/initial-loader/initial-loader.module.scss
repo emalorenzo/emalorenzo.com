@@ -4,6 +4,68 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: black;
+  border: 1px solid black;
   z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.bootingSecuence {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  pointer-events: none;
+  height: 500px;
+  width: 400px;
+  overflow: hidden;
+
+  div {
+    overflow: hidden;
+  }
+
+  p {
+    font-size: 1.2vmin;
+    color: black;
+  }
+}
+
+.bootingBar {
+  width: 100%;
+  height: 0px;
+  background-color: black;
+  position: absolute;
+  bottom: 0;
+  z-index: -1;
+  padding: 10px;
+
+  .barWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 300vw;
+    background-image: repeating-linear-gradient(-45deg, black, black 30px, red 30px, red 40px);
+    animation: bootingBar 10s linear infinite;
+
+    @keyframes bootingBar {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-100vw);
+      }
+    }
+  }
 }

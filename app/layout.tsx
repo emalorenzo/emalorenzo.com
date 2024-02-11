@@ -1,7 +1,10 @@
 import { Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { InitialLoader } from "~/components/initial-loader";
 
 import { App } from "./app";
+
+import { getPostsMetadata } from "~/lib/cms";
 
 import "~/styles/global.scss";
 
@@ -47,6 +50,7 @@ const mono = localFont({
 });
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const posts = await getPostsMetadata();
   return (
     <html
       lang="en"
@@ -54,6 +58,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     >
       <body className="flex overflow-auto relative flex-col w-full h-screen">
         <App>{children}</App>
+        <InitialLoader posts={posts} />
       </body>
     </html>
   );

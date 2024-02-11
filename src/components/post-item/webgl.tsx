@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { forwardRef, useRef } from "react";
 import * as THREE from "three";
 import { usePxToThreeUnits } from "~/lib/utils";
+import { useLoaderStore } from "~/store/loader";
 import { useStore } from "~/store/store";
 import { PostMeta } from "~/types";
 
@@ -16,6 +17,7 @@ export const PostItemImage = forwardRef(function PostItemImageFn(
 ) {
   const material = useRef<any>(null!);
   const hoveredPost = useStore((state) => state.hoveredPost);
+  const appReady = useLoaderStore((state) => state.appReady);
 
   const isHovered = hoveredPost?.slug === post.slug;
 
@@ -37,7 +39,7 @@ export const PostItemImage = forwardRef(function PostItemImageFn(
 
   return (
     <mesh ref={ref} {...props}>
-      <planeGeometry args={[width, height, 32, 32]} />
+      <planeGeometry args={[appReady ? width : 0, appReady ? height : 0, 32, 32]} />
       <MeshDistortMaterial ref={material} map={texture} speed={2} distort={0} />
     </mesh>
   );

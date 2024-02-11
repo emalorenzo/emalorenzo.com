@@ -12,7 +12,6 @@ export function RootLayout({ children }: Props) {
       <MiniMap />
       {children}
       {/* <div className={styles.borderRight} /> */}
-      {/* <InitialLoader /> */}
     </div>
   );
 }

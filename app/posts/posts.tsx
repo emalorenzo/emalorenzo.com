@@ -10,13 +10,10 @@ import { useRouteVisible } from "~/hooks/useRouteVisible";
 import { useStore } from "~/store/store";
 import styles from "./posts.module.scss";
 
-export type Props = {
-  posts: PostMeta[];
-};
-
-export function Posts({ posts }: Props) {
+export function Posts() {
   const { post: slug } = useParams();
   const { setPosts, setActivePost } = useStore.getState();
+  const posts = useStore((state) => state.posts);
 
   const getStatus = (post: PostMeta) => {
     if (slug) {
@@ -28,10 +25,9 @@ export function Posts({ posts }: Props) {
 
   useEffect(() => {
     if (posts.length) {
-      setPosts(posts);
       setActivePost(null);
     }
-  }, [posts, setPosts, setActivePost]);
+  }, [posts.length, setActivePost]);
 
   const isVisible = useRouteVisible();
 

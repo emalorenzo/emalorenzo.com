@@ -6,10 +6,19 @@
   height: var(--layout-threshold-top);
   padding-left: var(--layout-minimap-width);
   background-color: #fff;
-  border-bottom: 1px solid #ccc;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .headerBorder {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+    z-index: 10;
+  }
 
   .title {
     font-size: 1rem;

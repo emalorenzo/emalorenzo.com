@@ -15,7 +15,7 @@ type Props = {
 
 export function PostItem({ post, status, ...props }: Props) {
   const ref = useRef<HTMLDivElement>(null!);
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState<boolean>(null!);
   const useWebGL = useStore((state) => state.useWebGL);
   const activePost = useStore((state) => state.activePost);
   const { setHoveredPost, setActivePost } = useStore.getState();
@@ -60,7 +60,7 @@ export function PostItem({ post, status, ...props }: Props) {
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
         >
-          <HackerText active={hovered} className={styles.title}>
+          <HackerText active={hovered === null || hovered} className={styles.title}>
             {post.title}
           </HackerText>
           <motion.h3

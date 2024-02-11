@@ -7,16 +7,22 @@ export type NavigationOptions = {
 };
 
 type LoaderStore = {
-  initialLoadReady: boolean;
-  setInitialLoadReady: (initialLoadReady: boolean) => void;
+  canvasCreated: boolean;
+  setCanvasCreated: (canvasCreated: boolean) => void;
+
+  appReady: boolean;
+  setAppReady: (appReady: boolean) => void;
   targetRoute: string | null;
   navigationOptions: NavigationOptions;
   setTargetRoute: (targetRoute: string | null, navigationOptions: NavigationOptions) => void;
 };
 
 export const useLoaderStore = create<LoaderStore>((set) => ({
-  initialLoadReady: true,
-  setInitialLoadReady: (initialLoadReady) => set({ initialLoadReady }),
+  canvasCreated: false,
+  setCanvasCreated: (canvasCreated) => set({ canvasCreated }),
+
+  appReady: false,
+  setAppReady: (appReady) => set({ appReady }),
 
   targetRoute: null,
   navigationOptions: {},

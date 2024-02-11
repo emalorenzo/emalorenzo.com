@@ -6,13 +6,23 @@ type Props = {
   as?: React.ElementType;
   children: React.ReactNode;
   active?: boolean;
+  iterationsToAdvance?: number;
+  speed?: number;
 } & JSX.IntrinsicElements["div"];
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const randomLettersAmount = 3;
-const interationsToAdvance = 2;
+const ITERATIONS_TO_ADVANCE = 2;
+const ITERATION_SPEED = 15;
 
-export function HackerText({ children, className, active, ...props }: Props) {
+export function HackerText({
+  children,
+  className,
+  iterationsToAdvance = ITERATIONS_TO_ADVANCE,
+  speed = ITERATION_SPEED,
+  active,
+  ...props
+}: Props) {
   const interval = useRef<any>(null);
   const [text, setText] = useState(children);
 
@@ -44,9 +54,10 @@ export function HackerText({ children, className, active, ...props }: Props) {
           clearInterval(interval.current);
         }
 
-        iteration += 1 / interationsToAdvance;
+        iteration += 1 / iterationsToAdvance;
         setText(newText);
-      }, 15);
+        console.log("settext");
+      }, speed);
     }
 
     return () => {
@@ -54,12 +65,12 @@ export function HackerText({ children, className, active, ...props }: Props) {
         clearInterval(interval.current);
       }
     };
-  }, [children, active]);
+  }, [active, children, iterationsToAdvance, speed]);
 
   return (
-    <div className={clsx(styles.text, className)} {...props}>
+    <span className={clsx(styles.text, className)} {...props}>
       <span className={styles.animatedText}>{text}</span>
       <span className={styles.spacerText}>{children}</span>
-    </div>
+    </span>
   );
 }

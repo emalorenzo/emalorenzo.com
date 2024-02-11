@@ -1,38 +1,49 @@
-import { AnimatePresence, motion } from "framer-motion";
+"use client";
+
+import { useEffect, useState } from "react";
 import { useLoaderStore } from "~/store/loader";
-
-import { useGSAP } from "@gsap/react";
-import { useProgress } from "@react-three/drei";
-import gsap from "gsap";
-import { useEffect, useRef } from "react";
+import { PostMeta } from "~/types";
+import { BootingSecuence } from "./booting-secuence";
 import styles from "./initial-loader.module.scss";
+import { LoaderManager } from "./loader-manager";
 
-export function InitialLoader() {
-  const ref = useRef<HTMLDivElement>(null!);
+type Props = {
+  posts: PostMeta[];
+};
 
-  const setReady = useLoaderStore((state) => state.setInitialLoadReady);
-  const { active: isLoadingAssets } = useProgress();
+export function InitialLoader({ posts }: Props) {
+  const [booting, setBooting] = useState(true);
+  const [bootingText, setBootingText] = useState(true);
+  const setAppReady = useLoaderStore((state) => state.setAppReady);
 
-  const { contextSafe } = useGSAP({ scope: ref });
-
-  const exitTransition = contextSafe(() => {
-    gsap.to(ref.current, {
-      x: "100%",
-      duration: 0.7,
-      ease: "sine.inOut",
-    });
-  });
+  const appReady = !booting && !bootingText;
 
   useEffect(() => {
-    if (!isLoadingAssets) {
-      setReady(true);
-      exitTransition();
+    if (appReady) {
+      setTimeout(() => {
+        setAppReady(true);
+      }, 1000);
     }
-  }, [isLoadingAssets, setReady, exitTransition]);
+  }, [appReady, setAppReady]);
 
   return (
-    <AnimatePresence>
-      <motion.div ref={ref} className={styles.initialLoader} />
-    </AnimatePresence>
+    <>
+      <LoaderManager
+        posts={posts}
+        onLoaded={() => {
+          setBooting(false);
+        }}
+      />
+      <div className={styles.initialLoader}>
+        <BootingSecuence
+          visible={!appReady}
+          duration={1}
+          onComplete={() => {
+            setBootingText(false);
+          }}
+        />
+        {/* <BootingBar visible={booting} /> */}
+      </div>
+    </>
   );
 }

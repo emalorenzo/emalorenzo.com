@@ -2,8 +2,17 @@
   position: fixed;
   height: 100vh;
   width: var(--layout-minimap-width);
-  border-right: 1px solid #ccc;
   pointer-events: none;
+
+  .border {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #ccc;
+    z-index: 10;
+  }
 }
 
 // .borderRight {

@@ -24,7 +24,7 @@ export function PageLoader() {
 
   const targetRoute = useLoaderStore((state) => state.targetRoute);
   const navigationOptions = useLoaderStore((state) => state.navigationOptions);
-  const initialLoadReady = useLoaderStore((state) => state.initialLoadReady);
+  const appReady = useLoaderStore((state) => state.appReady);
   const setTargetRoute = useLoaderStore.getState().setTargetRoute;
 
   const handleRouteChange = useCallback(async () => {
@@ -39,7 +39,7 @@ export function PageLoader() {
   }, [navigationOptions, router.push, router.replace, targetRoute]);
 
   useEffect(() => {
-    if (!targetRoute || !initialLoadReady) return;
+    if (!targetRoute || !appReady) return;
 
     const target = targetRoute?.split("?")[0];
 
@@ -60,8 +60,8 @@ export function PageLoader() {
       }, 100);
     }
   }, [
+    appReady,
     handleRouteChange,
-    initialLoadReady,
     isLoadingAssets,
     navigationOptions.showLoader,
     pathname,

@@ -50,7 +50,7 @@ function Transition() {
   }, [visible, animateTransition]);
 
   return (
-    <mesh ref={ref} position={[0, 0, 0.2]}>
+    <mesh ref={ref} position={[viewport.width, 0, 0.2]}>
       <planeGeometry args={[viewport.width, viewport.height]} />
       <meshBasicMaterial color={color || "#000"} />
     </mesh>

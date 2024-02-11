@@ -6,9 +6,12 @@ import { Suspense } from "react";
 import * as THREE from "three";
 
 import { R3F } from "~/lib/r3f";
+import { useLoaderStore } from "~/store/loader";
 import { Shared } from "../../../app/shared";
 
 export function GlobalCanvas() {
+  const { setCanvasCreated } = useLoaderStore.getState();
+
   return (
     <Canvas
       style={{
@@ -28,6 +31,7 @@ export function GlobalCanvas() {
       eventPrefix="client"
       eventSource={document.body}
       shadows
+      onCreated={({ gl }) => setCanvasCreated(true)}
     >
       <Suspense fallback={null}>
         <View.Port />
