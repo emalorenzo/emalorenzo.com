@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { InitialLoader } from "~/components/initial-loader";
@@ -59,6 +60,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="flex overflow-auto relative flex-col w-full h-screen">
         <App>{children}</App>
         <InitialLoader posts={posts} />
+        <SpeedInsights />
       </body>
     </html>
   );
