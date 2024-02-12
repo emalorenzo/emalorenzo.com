@@ -33,12 +33,12 @@ export function Posts() {
 
   return (
     <AnimatePresence mode="wait">
-      {isVisible && posts.length && (
+      {posts.length && (
         <section className={styles.posts}>
           {posts.map((post, i) => {
             const status = getStatus(post);
 
-            return <PostItem key={i} post={post} status={status} />;
+            return <PostItem key={i} visible={isVisible} post={post} status={status} />;
           })}
         </section>
       )}

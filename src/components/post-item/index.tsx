@@ -11,9 +11,10 @@ import styles from "./post-item.module.scss";
 type Props = {
   post: PostMeta;
   status: "mini" | "idle" | "active";
-} & JSX.IntrinsicElements["group"];
+  visible?: boolean;
+};
 
-export function PostItem({ post, status, ...props }: Props) {
+export function PostItem({ post, status, visible = true, ...props }: Props) {
   const ref = useRef<HTMLDivElement>(null!);
   const [hovered, setHovered] = useState<boolean>(null!);
   const useWebGL = useStore((state) => state.useWebGL);
@@ -43,6 +44,9 @@ export function PostItem({ post, status, ...props }: Props) {
     setActivePost(post);
   };
 
+  // first condition is for the first render, but when app is ready
+  const titleActive = (hovered === null && visible) || hovered;
+
   return (
     <Link href={targetURL} navigationOptions={{ delay: useWebGL ? 1000 : 0 }}>
       <article
@@ -56,18 +60,16 @@ export function PostItem({ post, status, ...props }: Props) {
         <motion.div
           className={styles.textWrapper}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
+          animate={{ opacity: visible ? 1 : 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <HackerText active={hovered === null || hovered} className={styles.title}>
+          <HackerText active={titleActive} className={styles.title}>
             {post.title}
           </HackerText>
           <motion.h3
             className={styles.summary}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            animate={{ opacity: visible ? 1 : 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             {post.summary}
