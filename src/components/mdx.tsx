@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Figure } from "~/components/blog/figure";
 import { SideNote } from "~/components/blog/sidenote";
 import { TableOfContents } from "~/components/blog/toc";
+import { Video } from "~/components/blog/video";
 
 type Props = {
   source: MDXRemoteSerializeResult;
@@ -35,6 +36,7 @@ export const MDX = ({ source }: Props) => {
         Image: (props) => <Image alt={props.alt} style={{ objectFit: "cover" }} {...props} />,
         Row,
         RowItem,
+        Video,
       }}
     />
   );
